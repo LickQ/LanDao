@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lin.landao.dao.ProductMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        product_id, product_name, product_price, product_stock, product_description, product_icon, product_status,
+        category_type, create_time, update_time, inn_id
+    </sql>
+    <!--根据id查询信息-->
+    <select id="getProductById" parameterType="integer" resultType="com.lin.landao.entities.Product">
+        select * from product where product_id= #{productId};
+    </select>
+    <!--根据status查询信息-->
+    <select id="getProductByStatus" parameterType="integer" resultType="com.lin.landao.entities.Product">
+        select * from product where product_status= #{productStatus};
+    </select>
+    <!--查询所有信息-->
+    <select id="queryProductAll" resultType="com.lin.landao.entities.Product">
+        select * from product;
+    </select>
+    <!--添加-->
+    <insert id="create" parameterType="com.lin.landao.entities.Product"
+            useGeneratedKeys="true" keyProperty="productId">
+		insert into
+		product(product_name,product_price,product_stock,product_description,product_icon,product_status,category_type,create_time,inn_id)
+		values(#{productName},#{productPrice},#{productStock},#{productDescription},#{productIcon},#{productStatus},#{categoryType},#{createTime},#{innId})
+	</insert>
+    <!--根据id删除信息-->
+    <delete id="deleteProductById" parameterType="java.lang.Integer">
+		delete from product
+		where product_id
+		=#{productId,jdbcType=INTEGER}
+	</delete>
+    <!--根据id修改-->
+    <update id="updateProductById"
+            parameterType="com.lin.landao.entities.Product">
+		update product
+		set
+		product_name=#{productName},
+		product_price=#{productPrice},
+		product_stock=#{productStock},
+		product_description=#{productDescription},
+		product_status=#{productStatus},
+		category_type=#{categoryType},
+		inn_id=#{innId},
+		product_icon =#{productIcon}
+		where product_id = #{productId}
+    </update>
+
+
+	<!--加库存-->
+    <update id="increaseStock" parameterType="com.lin.landao.dto.CartDTO">
+		UPDATE product
+		set
+		product_stock=product_stock+#{productQuantity}
+		where
+		product_id = #{productId}
+</update>
+
+	<!--扣库存-->
+	<update id="decreaseStock" parameterType="com.lin.landao.dto.CartDTO">
+		UPDATE product
+		set
+		product_stock=product_stock-#{productQuantity}
+		where
+		product_id =#{productId}
+	</update>
+
+
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lin.landao.dao.OrderDetailMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        detail_id, order_id, product_id, product_name, product_price, product_quantity, product_icon, create_time,
+        update_time
+    </sql>
+    <!--根据id查询信息-->
+    <select id="getOrderDetailById" parameterType="integer" resultType="com.lin.landao.entities.OrderDetail">
+        select * from order_detail where detail_id= #{detailId};
+    </select>
+    <!--查询所有信息-->
+    <select id="queryOrderDetailAll" resultType="com.lin.landao.entities.OrderDetail">
+        select * from order_detail;
+    </select>
+
+    <!--查询所有信息-->
+    <select id="queryOrderDetailAllById" parameterType="integer" resultType="com.lin.landao.entities.OrderDetail">
+        select * from order_detail where order_id= #{orderId};
+    </select>
+    <!--添加-->
+    <insert id="create" parameterType="com.lin.landao.entities.OrderDetail"
+            useGeneratedKeys="true" keyProperty="detailId">
+		insert into
+		order_detail(order_id,product_id,product_name,product_price,product_quantity,product_icon,create_time)
+		values(#{orderId},#{productId},#{productName},#{productPrice},#{productQuantity},#{productIcon},#{createTime})
+	</insert>
+    <!--根据id删除信息-->
+    <delete id="deleteOrderDetailById" parameterType="java.lang.Integer">
+		delete from order_detail
+		where detail_id
+		=#{detailId,jdbcType=INTEGER}
+	</delete>
+    <!--&lt;!&ndash;根据id修改&ndash;&gt;-->
+    <!--<update id="updateOrderDetailById"-->
+            <!--parameterType="com.lin.landao.entities.Inn">-->
+		<!--update order_detail-->
+		<!--set-->
+		<!--inn_name=#{innName,jdbcType=VARCHAR},-->
+		<!--inn_address=#{innAddress,jdbcType=VARCHAR},-->
+		<!--inn_picture=#{innPicture,jdbcType=VARCHAR},-->
+		<!--inn_hotvalue =#{innHotvalue,jdbcType=INTEGER}-->
+		<!--where inn_id = #{innId,jdbcType=INTEGER}-->
+<!--</update>-->
+</mapper>

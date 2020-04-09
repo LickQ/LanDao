@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lin.landao.dao.InnMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        inn_id, inn_name, inn_address, inn_picture, inn_hotvalue, comment_id
+    </sql>
+    <!--根据id查询信息-->
+    <select id="getInnById" parameterType="integer" resultType="com.lin.landao.entities.Inn">
+        select * from inn where inn_id= #{innId};
+    </select>
+    <!--查询所有信息-->
+    <select id="queryInnAll" resultType="com.lin.landao.entities.Inn">
+        select * from inn;
+    </select>
+    <!--添加-->
+    <insert id="create" parameterType="com.lin.landao.entities.Inn"
+            useGeneratedKeys="true" keyProperty="innId">
+		insert into
+		inn(inn_name,inn_address,inn_picture,inn_hotvalue,comment_id)
+		values(#{innName},#{innAddress},#{innPicture},#{innHotvalue},#{commentId})
+	</insert>
+    <!--根据id删除信息-->
+    <delete id="deleteInnById" parameterType="java.lang.Integer">
+		delete from inn
+		where inn_id
+		=#{innId,jdbcType=INTEGER}
+	</delete>
+    <!--根据id修改-->
+    <update id="updateInnById"
+            parameterType="com.lin.landao.entities.Inn">
+		update inn
+		set
+		inn_name=#{innName,jdbcType=VARCHAR},
+		inn_address=#{innAddress,jdbcType=VARCHAR},
+		inn_picture=#{innPicture,jdbcType=VARCHAR},
+		inn_hotvalue =#{innHotvalue,jdbcType=INTEGER}
+		where inn_id = #{innId,jdbcType=INTEGER}
+</update>
+
+</mapper>

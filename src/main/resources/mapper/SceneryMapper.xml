@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lin.landao.dao.SceneryMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        scenery_id, scenery_name, scenery_picture, scenery_hotvalue, scenery_address
+    </sql>
+    <!--根据id查询信息-->
+    <select id="getSceneryById" parameterType="integer" resultType="com.lin.landao.entities.Scenery">
+        select * from scenery where order_id= #{orderId};
+    </select>
+    <!--查询所有信息-->
+    <select id="querySceneryAll" resultType="com.lin.landao.entities.Scenery">
+        select * from scenery;
+    </select>
+    <!--添加-->
+    <insert id="create" parameterType="com.lin.landao.entities.Scenery"
+            useGeneratedKeys="true" keyProperty="sceneryId">
+		insert into
+		scenery(scenery_name,scenery_picture,scenery_hotvalue,scenery_address)
+		values(#{sceneryName},#{sceneryPicture},#{sceneryHotvalue},#{sceneryAddress})
+	</insert>
+    <!--根据id删除信息-->
+    <delete id="deleteSceneryById" parameterType="java.lang.Integer">
+		delete from scenery
+		where scenery_id
+		=#{sceneryId,jdbcType=INTEGER}
+	</delete>
+    <!--根据id修改-->
+    <update id="updateSceneryById"
+            parameterType="com.lin.landao.entities.Scenery">
+		update scenery
+		set
+		scenery_name=#{sceneryName},
+		scenery_picture=#{sceneryPicture},
+		scenery_hotvalue=#{sceneryHotvalue},
+		scenery_address=#{sceneryAddress},
+		where scenery_id = #{sceneryId}
+</update>
+</mapper>

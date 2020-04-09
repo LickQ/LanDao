@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lin.landao.dao.AdminMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        admin_id, admin_name, admin_password, inn_id
+    </sql>
+    <!--添加-->
+    <insert id="create" parameterType="com.lin.landao.entities.Admin"
+            useGeneratedKeys="true" keyProperty="adminId">
+		insert into
+		admin(admin_name,admin_password,inn_id)
+		values(#{adminName},#{adminPassword},#{innId})
+	</insert>
+    <!--根据id查询信息-->
+    <select id="getAdminById" parameterType="integer" resultType="com.lin.landao.entities.Admin">
+        select * from admin where admin_id =#{adminId};
+    </select>
+    <!--查询所有信息-->
+    <select id="queryAdminAll" resultType="com.lin.landao.entities.Admin">
+        select * from admin;
+    </select>
+    <!--根据id删除信息-->
+    <delete id="deleteAdminById" parameterType="java.lang.Integer">
+		delete from admin
+		where admin_id
+		=#{adminId,jdbcType=INTEGER}
+	</delete>
+    <!--根据id修改-->
+    <update id="updateAdminById"
+            parameterType="com.lin.landao.entities.Admin">
+		update admin
+		set
+		admin_name=#{adminName},
+		admin_password=#{adminPassword},
+		inn_id =#{innId}
+		where admin_id = #{adminId}
+	</update>
+	<!-- 根据用户名和密码查询 -->
+	<select id="Adminlogin" resultType="com.lin.landao.entities.Admin">
+        select * from admin where admin_name=#{adminName} and admin_password=#{adminPassword}
+    </select>
+
+
+</mapper>
