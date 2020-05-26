@@ -36,14 +36,19 @@ public class Inn implements Serializable {
     @TableField("inn_address")
     private String innAddress;
 
+    @TableField("inn_telephone")
+    private String innTelephone;
+
     @TableField("inn_picture")
     private String innPicture;
 
     @TableField("inn_hotvalue")
     private Integer innHotvalue;
 
-    @TableField("comment_id")
-    private String commentId;
+
+
+    @TableField("inn_description")
+    private String innDescription;
 
 
 }

@@ -4,15 +4,25 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        scenery_id, scenery_name, scenery_picture, scenery_hotvalue, scenery_address
+        scenery_id, scenery_name, scenery_picture, scenery_hotvalue, scenery_address ,abscissa_min,ordinate_min,abscissa_max,abscissa_min,scenery_summary,scenery_link
     </sql>
     <!--根据id查询信息-->
     <select id="getSceneryById" parameterType="integer" resultType="com.lin.landao.entities.Scenery">
-        select * from scenery where order_id= #{orderId};
+        select * from scenery where scenery_id= #{sceneryId};
     </select>
     <!--查询所有信息-->
     <select id="querySceneryAll" resultType="com.lin.landao.entities.Scenery">
         select * from scenery;
+    </select>
+
+	<!--&lt;!&ndash;根据坐标查询信息&ndash;&gt;-->
+	<!--<select id="getSceneryByCoordinate" resultType="com.lin.landao.entities.Scenery">-->
+        <!--select * from scenery where scenery_abscissa=#{sceneryAbscissa} and scenery_ordinate= #{sceneryOrdinate};-->
+    <!--</select>-->
+
+	<!--按热值排序返回的对象-->
+	<select id="querySceneryAllByHotValue" resultType="com.lin.landao.entities.Scenery">
+        SELECT * from scenery order by scenery_hotvalue Desc;
     </select>
     <!--添加-->
     <insert id="create" parameterType="com.lin.landao.entities.Scenery"
@@ -21,6 +31,7 @@
 		scenery(scenery_name,scenery_picture,scenery_hotvalue,scenery_address)
 		values(#{sceneryName},#{sceneryPicture},#{sceneryHotvalue},#{sceneryAddress})
 	</insert>
+
     <!--根据id删除信息-->
     <delete id="deleteSceneryById" parameterType="java.lang.Integer">
 		delete from scenery
@@ -35,7 +46,7 @@
 		scenery_name=#{sceneryName},
 		scenery_picture=#{sceneryPicture},
 		scenery_hotvalue=#{sceneryHotvalue},
-		scenery_address=#{sceneryAddress},
+		scenery_address=#{sceneryAddress}
 		where scenery_id = #{sceneryId}
 </update>
 </mapper>

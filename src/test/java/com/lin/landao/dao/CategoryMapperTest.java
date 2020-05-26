@@ -66,4 +66,10 @@ public class CategoryMapperTest {
         category.setCategoryId(3);
         categoryMapper.updateCategoryById(category);
     }
+
+    @Test
+    public void queryNavDirectoryAll() {
+//        List<NavDirectory> navDirectories = categoryMapper.queryNavDirectoryAll();
+//        Assert.assertNotNull(navDirectories);
+    }
 }

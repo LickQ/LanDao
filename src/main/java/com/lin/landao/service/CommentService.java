@@ -23,4 +23,8 @@ public interface CommentService extends IService<Comment> {
 
     //根据id删除
     void deleteCommentById(Integer id);
+    //根据innid查询所有
+    List<Comment> queryCommentAllByInnId(Integer innId);
+    //根据strategyId查询所有
+    List<Comment> queryCommentAllBystrategyId(Integer strategyId);
 }

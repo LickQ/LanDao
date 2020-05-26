@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lin.landao.entities.Scenery;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -18,7 +19,7 @@ public interface SceneryMapper extends BaseMapper<Scenery> {
     int create(Scenery scenery);
 
     //根据id查询
-    Scenery getSceneryById(Integer id);
+    Scenery getSceneryById(Integer sceneryId);
 
     //查询所有
     List<Scenery> querySceneryAll();
@@ -28,4 +29,9 @@ public interface SceneryMapper extends BaseMapper<Scenery> {
 
     //根据id修改
     void updateSceneryById(Scenery scenery);
+    //按热值排序返回的对象
+    List<Scenery> querySceneryAllByHotValue();
+
+    //根据坐标查询
+//    Scenery getSceneryByCoordinate(Map map);
 }

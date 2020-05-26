@@ -1,64 +1,62 @@
 package com.lin.landao.controller;
-//
-//import com.pjb.springbootweixinseller.dataobject.ProductCategory;
-//import com.pjb.springbootweixinseller.dataobject.ProductInfo;
-//import com.pjb.springbootweixinseller.service.CategoryService;
-//import com.pjb.springbootweixinseller.service.ProductService;
-//import com.pjb.springbootweixinseller.utils.ResultVOUtil;
-//import com.pjb.springbootweixinseller.vo.ProductInfoVO;
-//import com.pjb.springbootweixinseller.vo.ProductVO;
-//import com.pjb.springbootweixinseller.vo.ResultVO;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+
+import com.lin.landao.entities.Comment;
+import com.lin.landao.entities.Inn;
+import com.lin.landao.entities.Product;
+import com.lin.landao.service.CommentService;
+import com.lin.landao.service.InnService;
+import com.lin.landao.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-/**
- * 买家商品
- */
-@RestController
-@RequestMapping("/buyer/product")
+@Controller
+@Slf4j
 public class BuyerProductController {
+    @Resource
+    private ProductService productService;
+    @Resource
+    private InnService innService;
+    @Resource
+    private CommentService commentService;
+    @RequestMapping(value = "/productlist.action")
+    public ModelAndView innList(Integer innId,HttpServletRequest requset, HttpServletResponse response) throws IOException {
+        // 从Mysql中查询
+        ModelAndView mav = new ModelAndView();
+        Inn inns = innService.getInnById(innId);
+        HashMap map= new HashMap();
+        map.put("innId",innId);
+        map.put("productStatus",1);
+        List<Product> productlist = productService.getProductByInnIdAndStatus(map);
+        List<Comment> comments = commentService.queryCommentAllByInnId(innId);
+        mav.addObject("comments",comments);
+        mav.addObject("inns",inns);
+        mav.addObject("productlist", productlist);
+        mav.setViewName("productlist");
+        return mav;
+    }
 
-//    private final ProductService productService;
-//    private final CategoryService categoryService;
-//
-//    @Autowired
-//    public BuyerProductController(ProductService productService, CategoryService categoryService) {
-//        this.productService = productService;
-//        this.categoryService = categoryService;
-//    }
-//
-//    @GetMapping("/list")
-//    public ResultVO list() {
-//        //1. 查询所有的上架商品
-//        List<ProductInfo> productInfoList = productService.findUpAll();
-//        //2. 查询类目(一次性查询)
-//        //精简方法(java8, lambda)
-//        List<Integer> categoryTypeList = productInfoList.stream().map(ProductInfo::getCategoryType).collect(Collectors.toList());
-//        List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
-//        //3. 数据拼装
-//        List<ProductVO> productVOList = new ArrayList<>();
-//        for (ProductCategory productCategory: productCategoryList) {
-//            ProductVO productVO = new ProductVO();
-//            productVO.setCategoryType(productCategory.getCategoryType());
-//            productVO.setCategoryName(productCategory.getCategoryName());
-//            List<ProductInfoVO> productInfoVOList = new ArrayList<>();
-//            for (ProductInfo productInfo: productInfoList) {
-//                if (productInfo.getCategoryType().equals(productCategory.getCategoryType())) {
-//                    ProductInfoVO productInfoVO = new ProductInfoVO();
-//                    BeanUtils.copyProperties(productInfo, productInfoVO);
-//                    productInfoVOList.add(productInfoVO);
-//                }
-//            }
-//            productVO.setProductInfoVOList(productInfoVOList);
-//            productVOList.add(productVO);
-//        }
-//        return ResultVOUtil.success(productVOList);
-//    }
+    @RequestMapping(value = "/productinfo.action")
+    public ModelAndView productinfo(Integer productId) throws IOException {
+        // 从Mysql中查询
+        ModelAndView mav = new ModelAndView();
+        Product product= productService.getProductById(productId);
+        Integer innId = product.getInnId();
+        Inn inn = innService.getInnById(innId);
+        String innName=inn.getInnName();
+        mav.addObject("innName",innName);
+        mav.addObject("product", product);
+        mav.setViewName("productinfo");
+        return mav;
+    }
+
+
 }

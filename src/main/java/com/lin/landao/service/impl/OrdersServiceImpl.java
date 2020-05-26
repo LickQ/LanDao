@@ -3,6 +3,7 @@ package com.lin.landao.service.impl;
 import com.lin.landao.converter.Order2OrderDTOConverter;
 import com.lin.landao.dao.OrdersMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lin.landao.dao.UserMapper;
 import com.lin.landao.dto.CartDTO;
 import com.lin.landao.dto.OrderDTO;
 import com.lin.landao.entities.*;
@@ -51,24 +52,6 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     @Resource
     private UserService userService;
 
-    @Override
-    public List<OrderDTO> findList(Integer userId) {
-
-        List<Orders> orders = ordersMapper.queryOrdersAllByUserId(userId);
-        List<OrderDTO> orderDTOList = Order2OrderDTOConverter.convert(orders);
-        for (OrderDTO orderDTO : orderDTOList) {
-            User user = userService.getUserById(userId);
-            orderDTO.setUserName(user.getUserName());
-            orderDTO.setUserTelephone(user.getUserTelephone());
-
-        }
-        return orderDTOList;
-
-    }
-
-
-
-
 
     @Transactional
     @Override
@@ -108,6 +91,27 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         return orderDTO;
     }
 
+    @Override
+    public List<OrderDTO> findList(Integer userId) {
+
+        List<Orders> orders = ordersMapper.queryOrdersAllByUserId(userId);
+        List<OrderDTO> orderDTOList = Order2OrderDTOConverter.convert(orders);
+        for (OrderDTO orderDTO : orderDTOList) {
+            User user = userService.getUserById(userId);
+            orderDTO.setUserName(user.getUserName());
+            orderDTO.setUserTelephone(Integer.valueOf(user.getUserTelephone()));
+
+        }
+        return orderDTOList;
+
+    }
+
+
+
+
+
+
+
     @Transactional
     @Override
     public OrderDTO finish(OrderDTO orderDTO) {
@@ -126,7 +130,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     }
 
     @Override
-    public OrderDTO paid(OrderDTO orderDTO) {
+    public OrderDTO paid(OrderDTO  orderDTO) {
         //判断订单状态
         if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())) {
             log.error("【订单支付完成】订单状态不正确, orderId={}, orderStatus={}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
@@ -159,6 +163,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         orderDTO.setPayStatus(0);
         orderDTO.setOrderStatus(0);
 
+        String telephone = userService.getUserById(orderDTO.getUserId()).getUserTelephone();
+        orderDTO.setUserTelephone(Integer.valueOf(telephone));
+
         List<CartDTO> cartDTOList = new ArrayList<>();
         //1. 查询商品（数量, 价格）
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
@@ -181,10 +188,10 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         }
         //3. 写入订单数据库（orders和orderDetail）
         Orders order = new Orders();
+        orderDTO.setOrderAmount(orderAmount);
         orderDTO.setOrderId(orderId);
         BeanUtils.copyProperties(orderDTO, order);
-        order.setOrderAmount(orderAmount);
-
+        order.setInnId(orderDTO.getInnId());
         order.setOrderStatus(OrderStatusEnum.NEW.getCode());
         order.setPayStatus(PayStatusEnum.WAIT.getCode());
         ordersMapper.create(order);
@@ -207,7 +214,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         Integer userId = order.getUserId();
         User user = userService.getUserById(userId);
         orderDTO.setUserName(user.getUserName());
-        orderDTO.setUserTelephone(user.getUserTelephone());
+        orderDTO.setUserTelephone(Integer.valueOf(user.getUserTelephone()));
         BeanUtils.copyProperties(order, orderDTO);
         orderDTO.setOrderDetailList(orderDetailList);
         return orderDTO;
@@ -264,9 +271,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             Integer userId = orderDTO.getUserId();
             User user = userService.getUserById(userId);
             String userName = user.getUserName();
-            Integer userTelephone = user.getUserTelephone();
+            String  userTelephone = user.getUserTelephone();
             orderDTO.setUserName(userName);
-            orderDTO.setUserTelephone(userTelephone);
+            orderDTO.setUserTelephone(Integer.valueOf(userTelephone));
         }
 
 

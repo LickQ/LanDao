@@ -27,4 +27,10 @@ public interface CommentMapper extends BaseMapper<Comment> {
     //根据id删除
     void deleteCommentById(Integer id);
 
+    //根据innid查询所有
+    List<Comment> queryCommentAllByInnId(Integer innId);
+
+    //根据strategyId查询所有
+    List<Comment> queryCommentAllBystrategyId(Integer strategyId);
+
 }

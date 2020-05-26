@@ -18,21 +18,9 @@ import java.util.Map;
 @Controller
 public class AdminController {
 
-//    @Resource
     @Autowired
     private AdminService adminService;
 
-//
-//
-//
-//    @ResponseBody
-//    @GetMapping(value = "admin/get/{id}")
-//    public Admin getAdminById(@PathVariable("id") Integer id) {
-//
-//        Admin adminById = adminService.getAdminById(id);
-//        System.out.println(adminById.getAdminName());
-//        return adminById;
-//    }
 
 
     @RequestMapping(value = "/Admlogin.action", method = RequestMethod.GET)
@@ -41,9 +29,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/Admlogin.action", method = RequestMethod.POST)
-    public String Autlogin(String adminname, String password, HttpServletRequest request, HttpServletResponse response) {
+    public String Autlogin(String adminname, String adminpassword, HttpServletRequest request, HttpServletResponse response) {
 
-        Admin admin = adminService.Adminlogin(adminname, password);
+
+        Admin admin = adminService.getAdminByName(adminname);
         if (admin == null) {
             return"error";
         }

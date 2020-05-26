@@ -13,11 +13,11 @@ public interface CommentUserMapper extends BaseMapper<CommentUser> {
     //根据id查询
 //    Comment getCommentUserById(Integer id);
     //查询所有
-    List<Comment> queryCommentUserAll();
+//    List<Comment> queryCommentUserAll();
 
 
     //    查询user的信息和该user的所以comment信息
-    List<User> queryUserCommentsAll();
+//    List<User> queryUserCommentsAll();
 
 
 }

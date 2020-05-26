@@ -16,7 +16,7 @@ public class KeyUtil {
     public static synchronized Integer genUniqueKey() throws NoSuchAlgorithmException {
         Random random = SecureRandom.getInstanceStrong();
         UUID a=UUID.randomUUID();
-        Integer number = random.nextInt(100000) ;
+        Integer number = random.nextInt(1000) ;
         return number;
     }
 }

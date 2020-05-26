@@ -49,6 +49,14 @@ public class OrderDTO {
     @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
+
+    @TableField("start_date")
+    private Date startDate;
+
+    @TableField("end_date")
+    private Date endDate;
+
+
     List<OrderDetail> orderDetailList;
 
     @JsonIgnore

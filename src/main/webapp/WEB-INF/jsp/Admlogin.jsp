@@ -64,23 +64,23 @@ font {
 						<input type="hidden" name="method" value="login">
 						
 						<div class="form-group">
-							<label for="authorname" class="col-sm-2 control-label">用户名</label>
+							<label  class="col-sm-2 control-label">用户名</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"  name="adminname"
 									placeholder="请输入用户名">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+							<label class="col-sm-2 control-label">密码</label>
 							<div class="col-sm-6"> 
-								<input type="password" class="form-control" id="inputPassword3" name="password"
+								<input type="password" class="form-control" name="adminpassword"
 									placeholder="请输入密码">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputPassword3" class="col-sm-2 control-label">验证码</label>
+							<label  class="col-sm-2 control-label">验证码</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" id="inputPassword3"
+								<input type="text" class="form-control"
 									placeholder="请输入验证码">
 							</div>
 							<div class="col-sm-3">

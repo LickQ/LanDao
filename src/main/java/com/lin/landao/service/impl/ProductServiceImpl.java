@@ -3,15 +3,20 @@ package com.lin.landao.service.impl;
 import com.lin.landao.dao.ProductMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lin.landao.dto.CartDTO;
+import com.lin.landao.entities.OrderPage;
 import com.lin.landao.entities.Product;
 import com.lin.landao.enums.ProductStatusEnum;
 import com.lin.landao.enums.ResultEnum;
 import com.lin.landao.exception.SellException;
 import com.lin.landao.service.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,6 +37,27 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     ;
+
+    @Override
+    public List<Product> getProductByInnId(Integer innId) {
+        return productMapper.getProductByInnId(innId);
+    }
+
+    @Override
+    public List<Product> getProductByInnIdAndStatus(Map map) {
+        return productMapper.getProductByInnIdAndStatus(map);
+    }
+
+    //返回分页对象
+    @Override
+    public Page<Product> findList(Pageable pageable, Integer innId) {
+        OrderPage orderPage = new OrderPage(pageable.getOffset(), pageable.getPageSize(), innId);
+        List<Product> items = productMapper.findAll(orderPage);
+        int totol = productMapper.countAll(innId);
+        Page result = new PageImpl(items, pageable, totol);
+        return result;
+
+    }
 
     //根据id查询
     public Product getProductById(Integer id) {
@@ -95,5 +121,33 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         }
 
         productMapper.decreaseStock(cartDTO);
+    }
+
+    @Override
+    public void onSale(Integer productId) {
+        Product product = productMapper.getProductById(productId);
+        if (product == null) {
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        if (product.getProductStatusEnum() == ProductStatusEnum.UP) {
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        //更新
+        product.setProductStatus(ProductStatusEnum.UP.getCode());
+        productMapper.updateProductById(product);
+    }
+
+    @Override
+    public void offSale(Integer productId) {
+        Product product = productMapper.getProductById(productId);
+        if (product == null) {
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        if (product.getProductStatusEnum() == ProductStatusEnum.DOWN) {
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        //更新
+        product.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        productMapper.updateProductById(product);
     }
 }

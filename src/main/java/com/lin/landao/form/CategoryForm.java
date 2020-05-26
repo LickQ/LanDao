@@ -11,5 +11,5 @@ public class CategoryForm {
     private String categoryName;
 
     /** 类目编号. */
-    private Integer categoryType;
+    private String categoryType;
 }

@@ -25,5 +25,6 @@ public interface AdminService extends IService<Admin> {
     //根据id修改
     void updateAdminById(Admin admin);
 
-    Admin Adminlogin(String adminname,String password);
+    Admin getAdminByName(String adminName);
+    Admin Adminlogin(String adminName,String adminPassword);
 }

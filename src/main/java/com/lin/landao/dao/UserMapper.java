@@ -20,6 +20,8 @@ public interface UserMapper extends BaseMapper<User> {
     //根据id查询
     User getUserById(Integer id);
 
+    User getUserByUserName(String userName);
+
     //查询所有
     List<User> queryUserAll();
 

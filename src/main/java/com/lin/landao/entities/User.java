@@ -30,7 +30,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //    主表实体包含从表实体的集合
-    private List<Comment> comments;
+//    private List<Comment> comments;
 
     @TableId(value = "user_id", type = IdType.AUTO)
     private Integer userId;
@@ -39,7 +39,19 @@ public class User implements Serializable {
     private String userName;
 
     @TableField("user_telephone")
-    private Integer userTelephone;
+    private String userTelephone;
+
+    @TableField("user_age")
+    private Integer userAge;
+
+    @TableField("user_rname")
+    private String userRname;
+
+    @TableField("user_sex")
+    private String userSex;
+
+    @TableField("user_password")
+    private String userPassword;
 
 
 }

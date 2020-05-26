@@ -8,13 +8,13 @@ import java.math.BigDecimal;
 public class ProductForm {
 
 
-    private String productId;
+    private Integer productId;
 
     /** 名字. */
     private String productName;
 
     /** 单价. */
-    private BigDecimal productPrice;
+    private Integer productPrice;
 
     /** 库存. */
     private Integer productStock;
@@ -26,5 +26,5 @@ public class ProductForm {
     private String productIcon;
 
     /** 类目编号. */
-    private Integer categoryType;
+    private String categoryType;
 }

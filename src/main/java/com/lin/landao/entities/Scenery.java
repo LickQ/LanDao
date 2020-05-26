@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
@@ -41,6 +42,28 @@ public class Scenery implements Serializable {
 
     @TableField("scenery_address")
     private String sceneryAddress;
+
+    @TableField("scenery_description")
+    private String sceneryDescription;
+
+    @TableField("scenery_summary")
+    private String scenerySummary;
+
+    @TableField("scenery_link")
+    private String sceneryLink;
+
+    @TableField("abscissa_min")
+    private BigDecimal abscissaMin;
+
+    @TableField("ordinate_min")
+    private BigDecimal ordinateMin;
+
+    @TableField("abscissa_max")
+    private BigDecimal abscissaMax;
+
+    @TableField("abscissa_min")
+    private BigDecimal ordinateMax;
+
 
 
 }

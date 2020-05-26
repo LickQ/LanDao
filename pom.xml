@@ -144,7 +144,12 @@
             <artifactId>tomcat-embed-jasper</artifactId>
             <scope>provided</scope>
         </dependency>
-
+        <!--把对象转为json-->
+        <!--<dependency>-->
+            <!--<groupId>net.sf.json-lib</groupId>-->
+            <!--<artifactId>json-lib</artifactId>-->
+            <!--<version>0.9</version>-->
+        <!--</dependency>-->
 
 
     </dependencies>

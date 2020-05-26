@@ -10,9 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -49,11 +47,6 @@ public class ProductMapperTest {
         }
     }
 
-    @Test
-    public void queryProductAll() {
-        List<Product> products = productMapper.queryProductAll();
-        Assert.assertNotNull(products);
-    }
 
     @Test
     public void deleteProductById() {
@@ -77,4 +70,18 @@ public class ProductMapperTest {
 
         productMapper.decreaseStock(cartDTO1);
     }
+
+    @Test
+    public void getProductByInnIdAndStatus() {
+        Integer innId=1;
+        Integer productStatus=1;
+        HashMap map= new HashMap();
+        map.put("innId",innId);
+        map.put("productStatus",productStatus);
+
+        List<Product> productByInnIdAndStatus = productMapper.getProductByInnIdAndStatus(map);
+        Assert.assertNotNull(productByInnIdAndStatus);
+    }
+
+
 }

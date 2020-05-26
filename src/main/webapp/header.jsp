@@ -4,35 +4,19 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
 <!DOCTYPE html>
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 <div class="container-fluid">
 
-	<div class="col-md-3" style="padding-top: 20px">
-		<ol class="list-inline">
-		
-			<c:if test="${empty author }">
-			<a href="/springmvc-mybatis2/Autlogin.action">作家登录</a>
+	<div class="col-md-3" style="padding-top: 20px" >
+		<ol class="list-inline" >
+			<c:if test="${empty user }">
+			<a href="${pageContext.request.contextPath }/userLogin.action" >登录</a>
 			</c:if>
-			<c:if test="${!empty author }">
-				<li style="color:red">欢迎您 <a href="${pageContext.request.contextPath }/autperson.action">${author.authorname }</a></li>
-				<li><a href="${pageContext.request.contextPath }/AuthorList.action">作者中心</a></li>
-				<li><a href="${pageContext.request.contextPath }/alogout.action">退出</a></li>
+			<c:if test="${!empty user }">
+				<li style="color:black">欢迎您 <a  style="color:grey" href="${pageContext.request.contextPath }/autperson.action">${user.userRname }</a></li>
+				<%--<li><a href="${pageContext.request.contextPath }/AuthorList.action">作者中心</a></li>--%>
+				<li><a style="color:grey" href="${pageContext.request.contextPath }/logout.action">注销</a></li>
 			</c:if>
-			<c:if test="${empty expert }">
-			<a href="/springmvc-mybatis2/Explogin.action">专家登录</a>
-			</c:if>
-			<c:if test="${!empty expert }">
-				<li style="color:red">欢迎您 <a href="${pageContext.request.contextPath }/expperson.action">${expert.expertname }</a></li>
-				<li><a href="${pageContext.request.contextPath }/ExpertList.action">专家中心</a></li>
-				<li><a href="${pageContext.request.contextPath }/elogout.action">退出</a></li>
-			</c:if>
-			<c:if test="${empty admin }">
-			<a href="/springmvc-mybatis2/Admlogin.action">管理员</a>
-			</c:if>
-			<c:if test="${!empty admin }">
-				<li style="color:red">欢迎您，${admin.adminname }</li>
-				<li><a href="${pageContext.request.contextPath }/adlogout.action">退出</a></li>
-			</c:if>
-			
 		</ol>
 	</div>
 </div>
@@ -50,20 +34,19 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/springmvc-mybatis2/index.action">首页</a>
+				<%--<a class="navbar-brand" href="${pageContext.request.contextPath }/index.action">主页</a>--%>
+				<%--<a class="navbar-brand" href="${pageContext.request.contextPath }/strategylist.action">旅游攻略</a>--%>
+				<%--<a class="navbar-brand" href="${pageContext.request.contextPath }/scenerylist.action">旅游景区</a>--%>
+				<%--<a class="navbar-brand" href="${pageContext.request.contextPath }/innlist.action">旅游民宿</a>--%>
+				<%--<a class="navbar-brand" href="${pageContext.request.contextPath }/map1.action">岚岛地图</a>--%>
+
 			</div>
 
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav" id="categoryUl">
-
-					<%-- <c:forEach items="${categortlist}" var="categortlist">
-
-
-						<li><a href="${pageContext.request.contextPath }/findTextByCid.action?cid=${categortlist.cid}">${categortlist.cname }</a></li>
-					</c:forEach> --%>
-
 				</ul>
+
 				<form class="navbar-form navbar-right"
 					action="${pageContext.request.contextPath }/findTextByName.action"
 					role="search" method="post">
@@ -77,23 +60,23 @@
 			$(function(){
 				var content = "";
 				$.post(
-					"${pageContext.request.contextPath}/category.action",
+					"${pageContext.request.contextPath}/NavDirectory.action",
 					function(data){
 						//[{"cid":"xxx","cname":"xxxx"},{},{}]
 						//动态创建<li><a href="#">${category.cname }</a></li>
-						
+
 						for(var i=0;i<data.length;i++){
-							content+="<li><a href='${pageContext.request.contextPath}/findTextByCid.action?cid="+data[i].cid+"'>"+data[i].cname+"</a></li>";
+							content+="<li><a href='${pageContext.request.contextPath}/"+data[i].navSuffix+"'>"+data[i].navName+"</a></li>";
 						}
-						
+
 						//将拼接好的li放置到ul中
 						$("#categoryUl").html(content);
 					},
 					"json"
 				);
-			}); 
-			
-			
+			});
+
+
 		</script>
 		
 

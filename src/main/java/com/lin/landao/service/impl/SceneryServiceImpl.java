@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -26,6 +27,16 @@ public class SceneryServiceImpl extends ServiceImpl<SceneryMapper, Scenery> impl
     public int create(Scenery scenery){
         return sceneryMapper.create(scenery);
     };
+
+    @Override
+//    public Scenery getSceneryByCoordinate(Map map) {
+//       return   sceneryMapper.getSceneryByCoordinate(map);
+//    }
+
+//    @Override
+    public List<Scenery> querySceneryAllByHotValue() {
+        return sceneryMapper.querySceneryAllByHotValue();
+    }
 
     //根据id查询
     public Scenery getSceneryById(Integer id){

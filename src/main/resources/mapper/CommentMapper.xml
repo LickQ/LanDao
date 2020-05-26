@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        comment_id, comment_detail, comment_status,user_id
+        comment_id, comment_detail, comment_status,user_id,inn_id,strategy_id
     </sql>
     <!--根据id查询信息-->
     <select id="getCommentById" parameterType="integer" resultType="com.lin.landao.entities.Comment">
@@ -14,12 +14,21 @@
     <select id="queryCommentAll" resultType="com.lin.landao.entities.Comment">
         select * from  comment;
     </select>
+    <!--根据innId查询所有信息-->
+    <select id="queryCommentAllByInnId" resultType="com.lin.landao.entities.Comment">
+        select * from  comment where inn_id = #{innId};
+    </select>
+    <!--根据strategy_id查询所有信息-->
+    <select id="queryCommentAllBystrategyId" resultType="com.lin.landao.entities.Comment">
+        select * from  comment where strategy_id = #{strategyId};
+    </select>
+
     <!--添加-->
     <insert id="create" parameterType="com.lin.landao.entities.Comment"
             useGeneratedKeys="true" keyProperty="commentId">
 		insert into
-		 comment(comment_detail,comment_status,user_id)
-		values(#{commentDetail},#{commentStatus},#{userId})
+		 comment(comment_detail,comment_status,user_id,inn_id,strategy_id)
+		values(#{commentDetail},#{commentStatus},#{userId},#{innId},#{strategyId})
 	</insert>
     <!--根据id删除信息-->
     <delete id="deleteCommentById" parameterType="java.lang.Integer">

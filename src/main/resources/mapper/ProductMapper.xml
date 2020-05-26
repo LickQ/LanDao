@@ -11,6 +11,14 @@
     <select id="getProductById" parameterType="integer" resultType="com.lin.landao.entities.Product">
         select * from product where product_id= #{productId};
     </select>
+	<!--根据innid查询信息-->
+	<select id="getProductByInnId" parameterType="integer" resultType="com.lin.landao.entities.Product">
+        select * from product where inn_id=#{innId};
+    </select>
+	<!--根据innid和状态查询信息-->
+	<select id="getProductByInnIdAndStatus" resultType="com.lin.landao.entities.Product">
+        select * from product where inn_id=#{innId} and product_status= #{productStatus};
+    </select>
     <!--根据status查询信息-->
     <select id="getProductByStatus" parameterType="integer" resultType="com.lin.landao.entities.Product">
         select * from product where product_status= #{productStatus};
@@ -34,7 +42,7 @@
 	</delete>
     <!--根据id修改-->
     <update id="updateProductById"
-            parameterType="com.lin.landao.entities.Product">
+            parameterType="com.lin.landao.entities.Product" >
 		update product
 		set
 		product_name=#{productName},
@@ -43,7 +51,7 @@
 		product_description=#{productDescription},
 		product_status=#{productStatus},
 		category_type=#{categoryType},
-		inn_id=#{innId},
+		update_time=NOW(),
 		product_icon =#{productIcon}
 		where product_id = #{productId}
     </update>
@@ -66,6 +74,16 @@
 		where
 		product_id =#{productId}
 	</update>
+
+	<!--查询分页所有信息-->
+	<select id="findAll" parameterType="com.lin.landao.entities.OrderPage" resultType="com.lin.landao.entities.Product">
+        select * from  product where inn_id = #{innId} limit #{offset},#{pageSize};
+    </select>
+
+	<select id="countAll" parameterType="integer" resultType="integer" >
+        select count(*) from  product where inn_id = #{innId};
+    </select>
+
 
 
 </mapper>

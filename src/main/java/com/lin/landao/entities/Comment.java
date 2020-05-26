@@ -41,4 +41,14 @@ public class Comment implements Serializable {
     @TableField("user_id")
     private Integer userId;
 
+    @TableField("user_name")
+    private String userName;
+
+    @TableField("inn_id")
+    private Integer innId;
+
+    @TableField("strategy_id")
+    private Integer strategyId;
+
+
 }

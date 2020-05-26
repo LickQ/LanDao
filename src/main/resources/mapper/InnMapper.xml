@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        inn_id, inn_name, inn_address, inn_picture, inn_hotvalue, comment_id
+        inn_id, inn_name, inn_address, inn_picture, inn_hotvalue
     </sql>
     <!--根据id查询信息-->
     <select id="getInnById" parameterType="integer" resultType="com.lin.landao.entities.Inn">
@@ -18,8 +18,8 @@
     <insert id="create" parameterType="com.lin.landao.entities.Inn"
             useGeneratedKeys="true" keyProperty="innId">
 		insert into
-		inn(inn_name,inn_address,inn_picture,inn_hotvalue,comment_id)
-		values(#{innName},#{innAddress},#{innPicture},#{innHotvalue},#{commentId})
+		inn(inn_name,inn_address,inn_picture,inn_hotvalue,inn_telephone)
+		values(#{innName},#{innAddress},#{innPicture},#{innHotvalue},#{innTelephone})
 	</insert>
     <!--根据id删除信息-->
     <delete id="deleteInnById" parameterType="java.lang.Integer">
@@ -35,6 +35,7 @@
 		inn_name=#{innName,jdbcType=VARCHAR},
 		inn_address=#{innAddress,jdbcType=VARCHAR},
 		inn_picture=#{innPicture,jdbcType=VARCHAR},
+		inn_telephone=#{innTelephone,jdbcType=VARCHAR},
 		inn_hotvalue =#{innHotvalue,jdbcType=INTEGER}
 		where inn_id = #{innId,jdbcType=INTEGER}
 </update>

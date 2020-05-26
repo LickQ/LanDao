@@ -2,6 +2,7 @@ package com.lin.landao.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lin.landao.entities.Category;
+import com.lin.landao.entities.NavDirectory;
 
 import java.util.List;
 
@@ -19,11 +20,13 @@ public interface CategoryService extends IService<Category> {
     //新增
     int create(Category category);
     // 查询所有
+    List<Category> queryCategoryAllById(Integer id);
     List<Category> queryCategoryAll();
-
     //    根据id删除
     void deleteCategoryById(Integer id);
 
     //    根据id修改
     void updateCategoryById(Category category);
+    //查询所有
+    List<NavDirectory> queryNavDirectoryAll();
 }

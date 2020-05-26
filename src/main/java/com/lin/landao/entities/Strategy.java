@@ -57,8 +57,7 @@ public class Strategy implements Serializable {
     @TableField("scenery_id")
     private Integer sceneryId;
 
-    @TableField("comment_id")
-    private Integer commentId;
+
 
 
 }

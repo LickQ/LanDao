@@ -5,7 +5,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         strategy_id, strategy_title, strategy_summary, strategy_detail, strategy_createtime, strategy_checkmark,
-        strategy_status, user_id, scenery_id, comment_id
+        strategy_status, user_id, scenery_id,
     </sql>
     <!--根据id查询信息-->
     <select id="getStrategyById" parameterType="integer" resultType="com.lin.landao.entities.Strategy">
@@ -19,8 +19,8 @@
     <insert id="create" parameterType="com.lin.landao.entities.Strategy"
             useGeneratedKeys="true" keyProperty="strategyId">
 		insert into
-		strategy(strategy_title,strategy_summary,strategy_detail,strategy_createtime,strategy_status,user_id,scenery_id,commentId)
-		values(#{strategyTitle},#{strategySummary},#{strategyDetail},#{strategyCreatetime},#{strategyStatus},#{userId},#{sceneryId},#{commentId})
+		strategy(strategy_title,strategy_summary,strategy_detail,strategy_createtime,strategy_status,user_id,scenery_id,strategy_checkmark)
+		values(#{strategyTitle},#{strategySummary},#{strategyDetail},#{strategyCreatetime},#{strategyStatus},#{userId},#{sceneryId},#{strategyCheckmark})
 	</insert>
     <!--根据id删除信息-->
     <delete id="deleteStrategyById" parameterType="java.lang.Integer">

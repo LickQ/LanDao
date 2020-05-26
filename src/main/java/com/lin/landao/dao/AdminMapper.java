@@ -33,7 +33,8 @@ public interface AdminMapper extends BaseMapper<Admin> {
     //根据id修改
     void updateAdminById(Admin admin);
 
+    Admin getAdminByName(String adminName);
 
-    Admin Adminlogin(String adminname,String password);
+    Admin Adminlogin(String adminName,String adminPassword);
 
 }

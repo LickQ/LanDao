@@ -10,16 +10,21 @@
     <select id="getUserById" parameterType="integer" resultType="com.lin.landao.entities.User">
         select * from user where user_id= #{userId};
     </select>
+
+    <!--根据username查询信息-->
+    <select id="getUserByUserName" parameterType="string" resultType="com.lin.landao.entities.User">
+        select * from user where user_name= #{userName};
+    </select>
     <!--查询所有信息-->
     <select id="queryUserAll" resultType="com.lin.landao.entities.User">
         select * from user;
     </select>
     <!--添加-->
     <insert id="create" parameterType="com.lin.landao.entities.User"
-            useGeneratedKeys="true" keyProperty="strategyId">
+            useGeneratedKeys="true" keyProperty="userId">
 		insert into
-		user(user_name,user_telephone)
-		values(#{userName},#{userTelephone})
+		user(user_name,user_telephone,user_password,user_age,user_rname,user_sex)
+		values(#{userName},#{userTelephone},#{userPassword},#{userAge},#{userRname},#{userSex})
 	</insert>
     <!--根据id删除信息-->
     <delete id="deleteUserById" parameterType="java.lang.Integer">
@@ -33,7 +38,8 @@
     update user
     set
     user_name=#{userName},
-    user_telephone=#{userTelephone},
+    user_password=#{userPassword},
+    user_telephone=#{userTelephone}
     where user_id= #{userId}
     </update>
 </mapper>

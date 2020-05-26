@@ -23,7 +23,7 @@
                             <th>描述</th>
                             <th>类目</th>
                             <th>创建时间</th>
-                            <th>修改时间</th>
+                            <#--<th>修改时间</th>-->
                             <th colspan="2">操作</th>
                         </tr>
                         </thead>
@@ -38,8 +38,8 @@
                             <td>${productInfo.productStock}</td>
                             <td>${productInfo.productDescription}</td>
                             <td>${productInfo.categoryType}</td>
-                            <td>${productInfo.createTime}</td>
-                            <td>${productInfo.updateTime}</td>
+                            <td>${productInfo.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                            <#--<td>${productInfo.updateTime?string('yyyy-MM-dd HH:mm:ss')}</td>-->
                             <td><a href="/seller/product/index?productId=${productInfo.productId}">修改</a></td>
                             <td>
                                 <#if productInfo.getProductStatusEnum().message == "在架">

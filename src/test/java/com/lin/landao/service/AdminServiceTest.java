@@ -50,22 +50,22 @@ public class AdminServiceTest {
 
     @Test
     public void queryCommnetUserAll() {
-        List<Comment> comments = commentUserMapper.queryCommentUserAll();
-        Assert.assertNotNull(comments);
-        for (Comment comment: comments){
-            System.out.println(comment);
-            System.out.println(comment.getUser());
-        }
+//        List<Comment> comments = commentUserMapper.queryCommentUserAll();
+//        Assert.assertNotNull(comments);
+//        for (Comment comment: comments){
+//            System.out.println(comment);
+//            System.out.println(comment.getUser());
+//        }
 
     }
 
     @Test
     public void queryUserCommnetAll() {
-        List<User> users = commentUserMapper.queryUserCommentsAll();
-        for (User user:users){
-            System.out.println(user);
-            System.out.println(user.getComments());
-        }
+//        List<User> users = commentUserMapper.queryUserCommentsAll();
+//        for (User user:users){
+//            System.out.println(user);
+//            System.out.println(user.getComments());
+//        }
     }
 
     @Test

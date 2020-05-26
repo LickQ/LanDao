@@ -22,6 +22,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Resource
     private UserMapper userMapper;
 
+    @Override
+    public User getUserByUserName(String userName) {
+        return userMapper.getUserByUserName(userName);
+    }
+
     //新增
     public int create(User user) {
         return userMapper.create(user);

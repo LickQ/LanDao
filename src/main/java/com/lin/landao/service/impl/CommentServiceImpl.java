@@ -29,6 +29,17 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     public int create(Comment comment){
         return commentMapper.create(comment);
     }
+
+    @Override
+    public List<Comment> queryCommentAllByInnId(Integer innId) {
+        return  commentMapper.queryCommentAllByInnId(innId);
+    }
+
+    @Override
+    public List<Comment> queryCommentAllBystrategyId(Integer strategyId) {
+        return commentMapper.queryCommentAllBystrategyId(strategyId);
+    }
+
     //查询所有
     public List<Comment> queryCommentAll(){
         return commentMapper.queryCommentAll();

@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        order_id, user_id, order_amount, order_status, pay_status, create_time, update_time
+        order_id, user_id, order_amount, order_status, pay_status, create_time, update_time,start_date,end_date
     </sql>
     <!--<sql id="Base_Column_List">-->
     <!--detail_id, order_id, product_id, product_name, product_price, product_quantity, product_icon, create_time,-->
@@ -61,8 +61,8 @@
     <insert id="create" parameterType="com.lin.landao.entities.Orders"
             useGeneratedKeys="true" keyProperty="orderId">
 		insert into
-		orders(order_id,user_id,order_amount,order_status,pay_status,create_time)
-		values(#{orderId},#{userId},#{orderAmount},#{orderStatus},#{payStatus},#{createTime})
+		orders(order_id,user_id,order_amount,order_status,pay_status,create_time,start_date,end_date,inn_id)
+		values(#{orderId},#{userId},#{orderAmount},#{orderStatus},#{payStatus},#{createTime},#{startDate},#{endDate},#{innId})
 	</insert>
     <!--根据id删除信息-->
     <delete id="deleteOrdersById" parameterType="java.lang.Integer">

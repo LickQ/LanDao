@@ -11,6 +11,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lin.landao.enums.ProductStatusEnum;
+import com.lin.landao.utils.EnumUtil;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -65,5 +68,10 @@ public class Product implements Serializable {
     @TableField("inn_id")
     private Integer innId;
 
+
+    @JsonIgnore
+    public ProductStatusEnum getProductStatusEnum() {
+        return EnumUtil.getByCode(productStatus, ProductStatusEnum.class);
+    }
 
 }

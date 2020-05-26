@@ -3,6 +3,7 @@ package com.lin.landao.service.impl;
 import com.lin.landao.dao.CategoryMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lin.landao.entities.Category;
+import com.lin.landao.entities.NavDirectory;
 import com.lin.landao.service.CategoryService;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,16 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         return categoryMapper.create(category);
     }
 
+    @Override
+    public List<NavDirectory> queryNavDirectoryAll() {
+        return categoryMapper.queryNavDirectoryAll();
+    }
+
     // 查询所有
+    public List<Category> queryCategoryAllById(Integer id) {
+        return categoryMapper.queryCategoryAllById(id);
+    }
+
     public List<Category> queryCategoryAll() {
         return categoryMapper.queryCategoryAll();
     }

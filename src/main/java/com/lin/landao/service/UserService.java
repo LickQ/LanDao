@@ -28,4 +28,6 @@ public interface UserService extends IService<User> {
 
     //根据id修改
     void updateUserById(User user);
+
+    User getUserByUserName(String userName);
 }

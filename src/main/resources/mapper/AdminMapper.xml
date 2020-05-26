@@ -17,6 +17,10 @@
     <select id="getAdminById" parameterType="integer" resultType="com.lin.landao.entities.Admin">
         select * from admin where admin_id =#{adminId};
     </select>
+	<!--根据anem查询信息-->
+	<select id="getAdminByName" parameterType="string" resultType="com.lin.landao.entities.Admin">
+        select * from admin where admin_name =#{adminName};
+    </select>
     <!--查询所有信息-->
     <select id="queryAdminAll" resultType="com.lin.landao.entities.Admin">
         select * from admin;
@@ -38,7 +42,7 @@
 		where admin_id = #{adminId}
 	</update>
 	<!-- 根据用户名和密码查询 -->
-	<select id="Adminlogin" resultType="com.lin.landao.entities.Admin">
+	<select id="Adminlogin"  resultType="com.lin.landao.entities.Admin">
         select * from admin where admin_name=#{adminName} and admin_password=#{adminPassword}
     </select>
 

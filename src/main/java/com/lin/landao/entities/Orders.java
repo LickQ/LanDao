@@ -59,5 +59,10 @@ public class Orders implements Serializable {
     private Integer innId;
 
 
+    @TableField("start_date")
+    private Date startDate;
+
+    @TableField("end_date")
+    private Date endDate;
 
 }

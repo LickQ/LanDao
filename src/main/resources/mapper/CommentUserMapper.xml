@@ -3,19 +3,19 @@
 <mapper namespace="com.lin.landao.dao.CommentUserMapper">
 
 
-    <!--定义封装comment和user的resultmap-->
-    <resultMap id="commentUserMap" type="com.lin.landao.entities.Comment">
-        <id property="commentId" column="comment_id"></id>
-        <result property="commentDetail" column="comment_detail"></result>
-        <result property="commentId" column="comment_id"></result>
-        <result property="commentStatus" column="comment_status"></result>
-        <!--一对一的关系映射，封装user的内容-->
-        <association property="user" column="user_id" javaType="com.lin.landao.entities.User">
-            <id property="userId" column="user_id"></id>
-            <result property="userName" column="user_name"></result>
-            <result property="userTelephone" column="user_telephone"></result>
-        </association>
-    </resultMap>
+    <!--&lt;!&ndash;定义封装comment和user的resultmap&ndash;&gt;-->
+    <!--<resultMap id="commentUserMap" type="com.lin.landao.entities.Comment">-->
+        <!--<id property="commentId" column="comment_id"></id>-->
+        <!--<result property="commentDetail" column="comment_detail"></result>-->
+        <!--<result property="commentId" column="comment_id"></result>-->
+        <!--<result property="commentStatus" column="comment_status"></result>-->
+        <!--&lt;!&ndash;一对一的关系映射，封装user的内容&ndash;&gt;-->
+        <!--<association property="user" column="user_id" javaType="com.lin.landao.entities.User">-->
+            <!--<id property="userId" column="user_id"></id>-->
+            <!--<result property="userName" column="user_name"></result>-->
+            <!--<result property="userTelephone" column="user_telephone"></result>-->
+        <!--</association>-->
+    <!--</resultMap>-->
 
 
     <!--根据id查询信息-->
@@ -23,35 +23,35 @@
     <!--select * from  comment where comment_id = #{commentId};-->
     <!--</select>-->
     <!--查询所有信息  多表查询一对一 方式二-->
-    <select id="queryCommentUserAll" resultMap="commentUserMap">
-       SELECT u.*,c.comment_detail,c.comment_status ,c.comment_id FROM comment c,user u WHERE u.user_id= c.user_id
-    </select>
-
-
-    <!--多表查询一对一 方式一 -->
-    <!--<select id="queryCommentUserAll" resultType="com.lin.landao.entities.CommentUser">-->
-    <!--SELECT u.*,c.comment_detail,c.comment_status ,c.comment_id FROM comment c,user u WHERE u.user_id= c.user_id-->
+    <!--<select id="queryCommentUserAll" resultMap="commentUserMap">-->
+       <!--SELECT u.*,c.comment_detail,c.comment_status ,c.comment_id FROM comment c,user u WHERE u.user_id= c.user_id-->
     <!--</select>-->
 
-    <!--定义user中的resultmap-->
-    <resultMap id="uerCommentMap" type="com.lin.landao.entities.User">
-        <id property="userId" column="user_id"></id>
-        <result property="userName" column="user_name"></result>
-        <result property="userTelephone" column="user_telephone"></result>
-        <!--配置user中的comment映射-->
-        <collection property="comments" ofType="com.lin.landao.entities.Comment">
-            <id property="commentId" column="comment_id"></id>
-            <result property="commentDetail" column="comment_detail"></result>
-            <result property="commentId" column="comment_id"></result>
-            <result property="commentStatus" column="comment_status"></result>
-        </collection>
 
-    </resultMap>
+    <!--&lt;!&ndash;多表查询一对一 方式一 &ndash;&gt;-->
+    <!--&lt;!&ndash;<select id="queryCommentUserAll" resultType="com.lin.landao.entities.CommentUser">&ndash;&gt;-->
+    <!--&lt;!&ndash;SELECT u.*,c.comment_detail,c.comment_status ,c.comment_id FROM comment c,user u WHERE u.user_id= c.user_id&ndash;&gt;-->
+    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;定义user中的resultmap&ndash;&gt;-->
+    <!--<resultMap id="uerCommentMap" type="com.lin.landao.entities.User">-->
+        <!--<id property="userId" column="user_id"></id>-->
+        <!--<result property="userName" column="user_name"></result>-->
+        <!--<result property="userTelephone" column="user_telephone"></result>-->
+        <!--&lt;!&ndash;配置user中的comment映射&ndash;&gt;-->
+        <!--<collection property="comments" ofType="com.lin.landao.entities.Comment">-->
+            <!--<id property="commentId" column="comment_id"></id>-->
+            <!--<result property="commentDetail" column="comment_detail"></result>-->
+            <!--<result property="commentId" column="comment_id"></result>-->
+            <!--<result property="commentStatus" column="comment_status"></result>-->
+        <!--</collection>-->
+
+    <!--</resultMap>-->
 
 
-    <select id="queryUserCommentsAll" resultMap="uerCommentMap">
-       SELECT * FROM user u left OUTER join comment c on u.user_id=c.user_id
-    </select>
+    <!--<select id="queryUserCommentsAll" resultMap="uerCommentMap">-->
+       <!--SELECT * FROM user u left OUTER join comment c on u.user_id=c.user_id-->
+    <!--</select>-->
 
 
 </mapper>

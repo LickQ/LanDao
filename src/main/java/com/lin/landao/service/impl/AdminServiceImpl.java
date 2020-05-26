@@ -32,6 +32,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         return admins;
     }
 
+    @Override
+    public Admin getAdminByName(String adminName) {
+        return adminMapper.getAdminByName(adminName);
+    }
 
     //根据id删除
     public void deleteAdminById(Integer id){
@@ -48,7 +52,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
-    public Admin Adminlogin(String adminName, String password) {
-    return  adminMapper.Adminlogin(adminName,password);
+    public Admin Adminlogin(String adminname, String password) {
+    return  adminMapper.Adminlogin(adminname,password);
     }
 }
